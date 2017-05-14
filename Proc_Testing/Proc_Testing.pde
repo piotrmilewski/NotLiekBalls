@@ -7,7 +7,7 @@ float b = random(256);
 
 void setup() {
   size(700, 700);
-  background(153, 50, 204);
+  background(r, g, b);
   RS = false;
   balls = new Ball[25];
   for (int i = 0; i < balls.length; i++) {
@@ -17,7 +17,7 @@ void setup() {
 }
 
 void draw() {
-  background(random(256), random(256), random(256));
+  background(r, g, b);
   for (Ball ball : balls) {
     if (RS) {
       for (Ball b : balls) {
@@ -34,8 +34,7 @@ void draw() {
 
 void mouseClicked() {
   RS = true;
-  Ball b = new Ball();
-  b.setState(1);
-  b.setxy(mouseX, mouseY);
-  balls[balls.length-1] = b;
+  balls[balls.length-1].setRadius(balls[balls.length-1].getOrigRadius());
+  balls[balls.length-1].setState(1);
+  balls[balls.length-1].setxy(mouseX, mouseY);
 }

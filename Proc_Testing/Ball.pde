@@ -12,11 +12,11 @@ class Ball {
   float max; //max radius for reacting balls
 
   Ball() {
-
     float r = random(256);
     float g = random(256);
     float b = random(256);
     c = color( r, g, b);
+    orad = 25;
     rad = 25;
     x = random((width - rad) + rad/2);
     y = random((height - rad) + rad/2);
@@ -32,33 +32,36 @@ class Ball {
   int getState() {
     return state;
   }
-  
+
   float getRadius() {
     return rad;
   }
   
+  float getOrigRadius() {
+    return orad;
+  }
+
   void setState(int x) {
     state = x;
   }
-  
+
   void setRadius(float x) {
     rad = x;
   }
-  
+
   void setxy(int nx, int ny) {
     x = nx;
     y = ny;
   }
 
   void move() {
-    if (state == 1){
+    if (state == 1) {
       expand();
     }
     ellipse(x, y, rad * 2, rad * 2);
     x = x + dx;
     y = y + dy;
     bounce();
-    fill(color(random(256), random(256), random(256)));
   }
 
   void bounce() {
@@ -78,7 +81,7 @@ class Ball {
       rad += grow;
     }
   }
-  
+
   float sqdistance(Ball ball) {
     return sqrt(pow((x-ball.x), 2) + pow((y-ball.y), 2));
   }
