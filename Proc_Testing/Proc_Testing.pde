@@ -19,18 +19,22 @@ void setup() { //sets up the animation
 void draw() { //loop
   background(r, g, b); //refreshes background and clears trail
   for (Ball ball : balls) {
-    if (RS) { //if Reaction has started
-      for (Ball b : balls) {
-        if (b.getState() == 1 || b.getState() == 2) { //compare the current ball to the reactive balls
-          if (ball.distance(b) < ball.getRadius() + b.getRadius()) { //if the distance from the current ball to a reactive ball is less than the sum of their radii, then they are in contact
-            if (ball.getState() != 2) {
-              ball.setState(1); //if they touch then current ball becomes part of the Chain Reaction
+    if (ball.getState() == 3) {
+      ball = null;
+    } else {
+      if (RS) { //if Reaction has started
+        for (Ball b : balls) {
+          if (b.getState() == 1 || b.getState() == 2) { //compare the current ball to the reactive balls
+            if (ball.distance(b) < ball.getRadius() + b.getRadius()) { //if the distance from the current ball to a reactive ball is less than the sum of their radii, then they are in contact
+              if (ball.getState() != 2) {
+                ball.setState(1); //if they touch then current ball becomes part of the Chain Reaction
+              }
             }
           }
         }
       }
+      ball.move(); //moves ball depending on ball's state
     }
-    ball.move(); //moves ball depending on ball's state
   }
 }
 
