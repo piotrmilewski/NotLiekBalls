@@ -33,8 +33,10 @@ void draw() { //loop
 }
 
 void mouseClicked() { //reads mouse clicks
-  RS = true; //starts reaction
-  balls[balls.length-1].setRadius(balls[balls.length-1].getOrigRadius()); //sets holder's radius to radius of other balls
-  balls[balls.length-1].setState(1); //makes holder reactive
-  balls[balls.length-1].setxy(mouseX, mouseY); //sets holder's position to wherever the mouse was clicked
+  if (!RS) {
+    RS = true; //starts reaction
+    balls[balls.length-1].setRadius(balls[balls.length-1].getOrigRadius()); //sets holder's radius to radius of other balls
+    balls[balls.length-1].setState(1); //makes holder reactive
+    balls[balls.length-1].setxy(mouseX, mouseY); //sets holder's position to wherever the mouse was clicked
+  }
 }
