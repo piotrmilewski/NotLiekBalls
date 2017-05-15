@@ -7,8 +7,9 @@ class Ball {
   color c; //color of ball
   float dx; //x speed
   float dy; //y speed
-  int state; //0 = normal, 1 = reacting
+  int state; //0 = normal, 1 = reacting, 2 = shrinking
   float grow; //increase radius by set size
+  float shrink; //decrease radius by set size
   float max; //max radius for reacting balls
 
   Ball() {
@@ -24,6 +25,7 @@ class Ball {
     dy = random(10) - 5;
     state = 0;
     grow = 1;
+    shrink = 0.2;
     max = 50;
     ellipseMode(CENTER);
     fill(c);
@@ -58,6 +60,12 @@ class Ball {
     if (state == 1) { //if state is 1 then expand the ball
       expand();
     }
+    else if (state == 2){
+      shrink();
+    }
+    if (rad >= max){
+      state = 2;
+    }
     ellipse(x, y, rad * 2, rad * 2); //draws the ball
     x = x + dx; //moves ball dx units in x direction
     y = y + dy; //moves ball dx units in y direction
@@ -79,6 +87,12 @@ class Ball {
     dy = 0; //stops y movement
     if (rad > 0 && rad < max) { //if 0 < ball radius < max, then inflate ball
       rad += grow;
+    }
+  }
+  
+  void shrink() { //decrease radius of ball to 0
+    if (rad >= 0.0) {
+      rad -= shrink;
     }
   }
 
